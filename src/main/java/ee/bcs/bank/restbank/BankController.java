@@ -19,7 +19,7 @@ public class BankController {
     @Resource
     private BankService bankService;
 
-    // TODO: et saada bank objektist ülevaade, siis loo uus controlleri endpoint    /bank
+    //  et saada bank objektist ülevaade, siis loo uus controlleri endpoint    /bank
     //  meetodi nimeks pane                                                         getBank()
 
     @GetMapping("/bank")
@@ -27,7 +27,7 @@ public class BankController {
         return bank;
     }
 
-//     TODO: et saada üks accounts JSON'i näidis,
+//      et saada üks accounts JSON'i näidis,
 //      siis loo uus controlleri endpoint                                           /example/account
 //      meetodi nimeks pane                                                         getExampleAccount()
 //      loo accountService alla uus teenus                                          createExampleAccount()
@@ -37,7 +37,7 @@ public class BankController {
         return accountService.createExampleAccount();
     }
 
-    // TODO: et saada üks transaction JSON'i näidis,
+    //  et saada üks transaction JSON'i näidis,
     //  siis loo uus controlleri endpoint                                           /example/transaction
     //  meetodi nimeks pane                                                         getExampleTransaction()
     //  loo transactionService alla uus teenus                                          createExampleTransaction()
@@ -48,11 +48,11 @@ public class BankController {
     }
 
 
-    // TODO: Et lisada uus account, loo uus controlleri endpoint                    /new/account
-    //  võta RequestBodyst sisse accountDto objekt
-    //  loo bankService alla uus teenus                                             addAccountToBank()
-    //  ja lisa see konto bank accounts listi
-    //  teenus võiks tagastada RequestResult objekti koos koos loodava konto id ja transaktsiooni id'ga
+//      Et lisada uus account, loo uus controlleri endpoint                    /new/account
+//      võta RequestBodyst sisse accountDto objekt
+//      loo bankService alla uus teenus                                             addAccountToBank()
+//      ja lisa see konto bank accounts listi
+//      teenus võiks tagastada RequestResult objekti koos koos loodava konto id ja transaktsiooni id'ga
 
     @PostMapping("/new/account")
     public RequestResult addAccountToBank(@RequestBody AccountDto accountDto) {
@@ -65,13 +65,18 @@ public class BankController {
         return requestResult;
 
     }
-        @PostMapping("/receive/transaction")
+
+    @PostMapping("/receive/transaction")
     public RequestResult receiveNewTransaction(@RequestBody TransactionDto transactionDto) {
         RequestResult requestResult = transactionService.receiveNewTransaction(bank, transactionDto);
         return requestResult;
     }
-    //  loo transactionService alla uus teenus                                      createTransactionForNewAccount()
-    //  loo bankService alla uus teenus                                             addTransaction()
+
+    @PutMapping("/update/owner")
+    public RequestResult updateOwnerDetails(@RequestBody AccountDto accountDto) {
+
+        return accountService.updateOwnerDetails(bank.getAccounts(), accountDto);
+    }
 
 
 }

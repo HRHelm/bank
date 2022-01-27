@@ -61,7 +61,7 @@ public class TransactionService {
         int accountId = transactionDto.getAccountId();
 
 //       kontrolli kas konto eksisteerib
-        if (!accountService.accountExist(accounts, accountId)) {
+        if (!accountService.accountIdExist(accounts, accountId)) {
             requestResult.setAccountId(accountId);
             requestResult.setError("Account ID " + accountId + " does not exsist!");
             return requestResult;
