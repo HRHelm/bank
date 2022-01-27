@@ -31,7 +31,7 @@ public class AccountService {
         return "EE" + (random.nextInt(9999) + 1000);
     }
 
-    public boolean accountExist(List<AccountDto> accounts, int accountId) {
+    public boolean accountIdExist(List<AccountDto> accounts, int accountId) {
         for (AccountDto account : accounts) {
             if (account.getId() == accountId) {
                 return true;
@@ -71,4 +71,27 @@ public class AccountService {
         }
         return null;
     }
+
+    public RequestResult updateOwnerDetails(List<AccountDto> accounts, AccountDto accountDto) {
+        RequestResult requestResult = new RequestResult();
+
+        int accountId = accountDto.getId();
+        if (!accountIdExist(accounts, accountId)) {
+            requestResult.setError("Account ID: " + accountId + "does not exist!");
+            requestResult.setAccountId(accountId);
+            return requestResult;
+        }
+
+        AccountDto account = getAccountByID(accounts, accountId);
+        account.setFirstName(accountDto.getFirstName());
+        account.setLastName(accountDto.getLastName());
+
+        requestResult.setAccountId(accountId);
+        requestResult.setMessage("Successfully updated account ");
+
+        return requestResult;
+    }
+
+
+
 }
