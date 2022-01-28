@@ -86,4 +86,13 @@ public class BankController {
 
         return accountService.deleteAccount(bank.getAccounts(), accountId);
     }
+
+    @PutMapping("/update/account/lock")
+    public RequestResult UpdateAccountLock(@RequestParam int accountId) {
+
+        return accountService.updateAccountLock(bank.getAccounts(), accountId);
+    }
+
+
+//    todo: Loo endpoint /bankstatement/by/lastname
 }
